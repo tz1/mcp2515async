@@ -1,0 +1,49 @@
+From 2fb567d335dceea7389262f7dc552e18fcaa9a9c Mon Sep 17 00:00:00 2001
+From: Andre B. Oliveira <anbadeol@gmail.com>
+Date: Mon, 18 Oct 2010 14:26:45 +0100
+Subject: [PATCH net-next-2.6] can: mcp2515: add spi_async driver for MCP2515
+
+Driver for Microchip MCP2515 SPI CAN controller.
+Uses the spi_async API directly for improved performance.
+
+Signed-off-by: Andre B. Oliveira <anbadeol@gmail.com>
+---
+ drivers/net/can/Kconfig   |   10 +
+ drivers/net/can/Makefile  |    1 +
+ drivers/net/can/mcp2515.c |  803 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 814 insertions(+), 0 deletions(-)
+ create mode 100644 drivers/net/can/mcp2515.c
+
+diff --git a/drivers/net/can/Kconfig b/drivers/net/can/Kconfig
+index 9d9e453..4908bfc 100644
+--- a/drivers/net/can/Kconfig
++++ b/drivers/net/can/Kconfig
+@@ -48,6 +48,16 @@ config CAN_TI_HECC
+ 	  Driver for TI HECC (High End CAN Controller) module found on many
+ 	  TI devices. The device specifications are available from www.ti.com
+ 
++config CAN_MCP2515
++	tristate "Microchip MCP2515 SPI CAN controller"
++	depends on SPI
++	select CAN_DEV
++	help
++	Driver for the Microchip MCP2515 SPI CAN controllers.
++	This is a new driver that uses the asynchronous SPI API directly,
++	eliminating the overhead of threads, work queues and synchronous SPI
++	wrappers, thus reducing SPI transactions latency to a minimum.
++
+ config CAN_MCP251X
+ 	tristate "Microchip MCP251x SPI CAN controllers"
+ 	depends on CAN_DEV && SPI && HAS_DMA
+diff --git a/drivers/net/can/Makefile b/drivers/net/can/Makefile
+index 0057537..679b103 100644
+--- a/drivers/net/can/Makefile
++++ b/drivers/net/can/Makefile
+@@ -13,6 +13,7 @@ obj-$(CONFIG_CAN_SJA1000)	+= sja1000/
+ obj-$(CONFIG_CAN_MSCAN)		+= mscan/
+ obj-$(CONFIG_CAN_AT91)		+= at91_can.o
+ obj-$(CONFIG_CAN_TI_HECC)	+= ti_hecc.o
++obj-$(CONFIG_CAN_MCP2515)	+= mcp2515.o
+ obj-$(CONFIG_CAN_MCP251X)	+= mcp251x.o
+ obj-$(CONFIG_CAN_BFIN)		+= bfin_can.o
+ obj-$(CONFIG_CAN_JANZ_ICAN3)	+= janz-ican3.o
