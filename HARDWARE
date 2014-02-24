@@ -1,0 +1,29 @@
+I am using the device from:
+
+http://microcontrollershop.com/product_info.php?products_id=4719
+
+Note the one I have looks different - the CAN interface is isolated and the board is larger.
+
+The frequency settings in the can setup script correspond to this module.
+
+Pin 1, NRST, Reset is left unconnected and is on the upper left.
+
+(RST)	MOSI
+CS	INT
+Ground	(nc)
+MISO	SCLK
+5v	3.3v
+
+On the PI, I have them connected to:
+
+		+(corner of the board)
+5v	3.3v
+x	x
+x	Ground
+x	x
+...
+x	x
+MOSI	x
+MISO	INT
+SCLK	CS
+x	x
