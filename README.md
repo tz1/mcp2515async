@@ -7,13 +7,19 @@ async SPI for MCP2515 to be build alongside the linux kernel i
 
 Some small mods as #defines to remove function attribute typing that doesn't work on the latest tree.
 
+This is a fork.
+
 Orignal code:
 
 http://clientes.netvisao.pt/anbadeol/mcp2515.html
 
-This is a fork.
+This doesn't build or include the can userspace tools which are at:
 
-Included is a build script.
+https://gitorious.org/linux-can/can-utils/source/110af11db13d7ab62684da5c0fd03fbb497645c9:
+
+But there is nothing special required to build working versions of them on the pi.
+
+Included is a build script to add CAN support to the raspian kernel.
 
 To build the can modules, you need to find the github verson hash for the current kernel and get the /proc/config.gz file, and run the canpi.sh on a laptop or desktop, preferably a fast one.  It will fetch all the pieces and rebuild the kernel and the added modules for CAN support.
 
