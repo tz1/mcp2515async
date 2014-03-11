@@ -13,6 +13,7 @@ mkdir $BASEDIR/modules
 git clone --depth 250 https://github.com/raspberrypi/linux.git
 git clone https://github.com/msperl/spi-config
 git clone https://github.com/tz1/mcp2515async
+git clone https://github.com/notro/spi-bcm2708.git
 git clone git://github.com/raspberrypi/tools.git
 export CCDIR=$BASEDIR/tools/arm-bcm2708/arm-bcm2708-linux-gnueabi/bin
 export CCPREFIX=$CCDIR/arm-bcm2708-linux-gnueabi-
@@ -89,6 +90,11 @@ ARCH=arm CROSS_COMPILE=${CCPREFIX} INSTALL_MOD_PATH=${MODULES_TEMP} make KDIR=$K
 cd $BASEDIR/spi-config
 ARCH=arm CROSS_COMPILE=${CCPREFIX} make KDIR=$KERNEL_SRC
 ARCH=arm CROSS_COMPILE=${CCPREFIX} INSTALL_MOD_PATH=${MODULES_TEMP} make KDIR=$KERNEL_SRC install
+cd $BASEDIR/spi-bcm2708
+ARCH=arm CROSS_COMPILE=${CCPREFIX} make KDIR=$KERNEL_SRC
+ARCH=arm CROSS_COMPILE=${CCPREFIX} INSTALL_MOD_PATH=${MODULES_TEMP} make KDIR=$KERNEL_SRC install
+
+rm ${MODULES_TEMP}/lib/modules/3.10.25+/kernel/drivers/spi/spi-bcm2708.ko
 
 # Pack the files
 
