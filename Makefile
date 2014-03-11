@@ -1,4 +1,4 @@
-obj-m := mcp2515.o
+obj-m := mcp2515.o isotp.o
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
 
