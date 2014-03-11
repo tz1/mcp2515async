@@ -33,3 +33,4 @@ The script is set for the raspian kernel as of 2/1/2014.  If the kernel is updat
 
 There is a second script to be run on the pi, startcan.sh, which will load the modules and start dumping CAN at 250000.
 
+isotp.c is also added, creating isotp.ko, orginally from https://gitorious.org/linux-can/can-modules
